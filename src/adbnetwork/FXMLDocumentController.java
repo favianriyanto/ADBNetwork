@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javax.swing.JOptionPane;
@@ -33,6 +34,26 @@ public class FXMLDocumentController implements Initializable {
     private Button konek;
     @FXML
     private Button diskonek;
+    @FXML
+    private Label text1;
+    @FXML
+    private Label text2;
+    @FXML
+    private Button hmm3;
+    @FXML
+    private Button hmm;
+    @FXML
+    private Button hmm2;
+    @FXML
+    private Button reboot2;
+    @FXML
+    private Button reboot;
+    @FXML
+    private Button recovery;
+    @FXML
+    private Button bootloader;
+    @FXML
+    private Button rebootbiasa;
     
     
     @Override
@@ -106,6 +127,60 @@ public class FXMLDocumentController implements Initializable {
         Runtime kucing = Runtime.getRuntime();
         Process kambing = kucing.exec("scrcpy");
 
+    }
+
+    @FXML
+    private void reboot(ActionEvent event) {
+        ip.setVisible(false);
+        status.setVisible(false);
+        konek.setVisible(false);
+        diskonek.setVisible(false);
+        text1.setVisible(false);
+        text2.setVisible(false);
+        hmm.setVisible(false);
+        hmm3.setVisible(false);
+        hmm2.setVisible(false);
+        reboot2.setVisible(true);
+        reboot.setVisible(false);
+        recovery.setVisible(true);
+        bootloader.setVisible(true);
+        rebootbiasa.setVisible(true);
+    }
+
+    @FXML
+    private void reboot2(ActionEvent event) {
+        ip.setVisible(true);
+        status.setVisible(true);
+        konek.setVisible(true);
+        diskonek.setVisible(true);
+        text1.setVisible(true);
+        text2.setVisible(true);
+        hmm.setVisible(true);
+        hmm3.setVisible(true);
+        hmm2.setVisible(true);
+        reboot2.setVisible(false);
+        reboot.setVisible(true);
+        recovery.setVisible(false);
+        bootloader.setVisible(false);
+        rebootbiasa.setVisible(false);
+    }
+
+    @FXML
+    private void recovery(ActionEvent event) throws IOException {
+        Runtime kucing = Runtime.getRuntime();
+        Process kambing = kucing.exec("adb reboot recovery");
+    }
+
+    @FXML
+    private void bootloader(ActionEvent event) throws IOException {
+        Runtime kucing = Runtime.getRuntime();
+        Process kambing = kucing.exec("adb reboot bootloader");
+    }
+
+    @FXML
+    private void rebootbiasa(ActionEvent event) throws IOException {
+        Runtime kucing = Runtime.getRuntime();
+        Process kambing = kucing.exec("adb reboot");
     }
     
 }
