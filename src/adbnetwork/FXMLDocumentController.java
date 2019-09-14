@@ -54,6 +54,8 @@ public class FXMLDocumentController implements Initializable {
     private Button bootloader;
     @FXML
     private Button rebootbiasa;
+    @FXML
+    private TextField port;
     
     
     @Override
@@ -65,12 +67,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void connect(ActionEvent event) throws IOException {
         status.clear();
+        String portnya = port.getText();
         String x;
         String ayam = ip.getText();
         Runtime kucing = Runtime.getRuntime();
-        Process kambing3 = kucing.exec("adb connect " + ayam);
-        Process kambing2 = kucing.exec("adb disconnect " + ayam);
-        Process kambing = kucing.exec("adb connect " + ayam);
+        Process kambing3 = kucing.exec("adb connect " + ayam + ":" + portnya);
+        Process kambing2 = kucing.exec("adb disconnect " + ayam + ":" + portnya);
+        Process kambing = kucing.exec("adb connect " + ayam + ":" + portnya);
 
         BufferedReader Input = new BufferedReader(new InputStreamReader(kambing.getInputStream()));
         while ((x = Input.readLine()) != null) {
@@ -94,11 +97,12 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void disconnect(ActionEvent event) throws IOException {
         status.clear();
+        String portnya = port.getText();
         String x;
         String ayam = ip.getText();
         Runtime kucing = Runtime.getRuntime();
-        Process kambing = kucing.exec("adb disconnect " + ayam);
-        Process kambing2 = kucing.exec("adb disconnect " + ayam);
+        Process kambing = kucing.exec("adb disconnect " + ayam + ":" + portnya);
+        Process kambing2 = kucing.exec("adb disconnect " + ayam + ":" + portnya);
         BufferedReader Input = new BufferedReader(new InputStreamReader(kambing2.getInputStream()));
         while ((x = Input.readLine()) != null) {
                 status.appendText(x);
@@ -145,6 +149,7 @@ public class FXMLDocumentController implements Initializable {
         recovery.setVisible(true);
         bootloader.setVisible(true);
         rebootbiasa.setVisible(true);
+        port.setVisible(false);
     }
 
     @FXML
@@ -163,6 +168,7 @@ public class FXMLDocumentController implements Initializable {
         recovery.setVisible(false);
         bootloader.setVisible(false);
         rebootbiasa.setVisible(false);
+        port.setVisible(true);
     }
 
     @FXML
